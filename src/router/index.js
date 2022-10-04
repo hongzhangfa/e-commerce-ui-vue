@@ -1,17 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+// import HomeView from '../views/HomeView.vue'
+import Home from '../views/Home.vue'
 
 import AddCategory from '../views/Category/AddCategory.vue'
 import Category from '../views/Category/Category.vue'
+import EditCategory from '../views/Category/EditCategory.vue'
 import Admin from '../views/Admin/Admin.vue'
 import Product from '../views/Product/Product.vue'
 import AddProduct from '../views/Product/AddProduct.vue'
+import EditProduct from '../views/Product/EditProduct.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Home',
+    component: Home
   },
   {
     path: '/about',
@@ -28,7 +31,12 @@ const routes = [
     name: 'Admin',
     component: Admin
   },
-
+//Category routes
+{
+  path: '/category',
+  name: 'Category',
+  component: Category
+},
   {
     path: '/admin/category',
     name: 'AdminCategory',
@@ -40,6 +48,17 @@ const routes = [
     component: AddCategory
   },
   {
+    path: '/admin/category/:id',
+    name: 'EditCategory',
+    component: EditCategory
+  },
+  //Product routess
+  {
+    path: '/product',
+    name: 'Product',
+    component: Product
+  },
+  {
     path: '/admin/product',
     name: 'AdminProduct',
     component: Product
@@ -48,8 +67,23 @@ const routes = [
     path: '/admin/product/new',
     name: 'AddProduct',
     component: AddProduct
+  },
+  {
+    path: '/admin/product/:id',
+    name: 'EditProduct',
+    component: EditProduct,
+  },
 
-  }
+  // {
+  //   path: '/wishlist',
+  //   name: 'Wishlist',
+  //   component: Wishlist
+  // },
+  // {
+  //   path : '/cart',
+  //   name : 'Cart',
+  //   component : Cart
+  // },
  
 ]
 

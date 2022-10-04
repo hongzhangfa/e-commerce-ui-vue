@@ -25,7 +25,8 @@
 import CategoryBox from '../../components/Category/CategoryBox.vue';
 
   export default {
-    name: "Cate-gory",
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: "Category",
     props: ["categories", "products"],
     data() {
       return {

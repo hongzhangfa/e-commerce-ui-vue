@@ -1,17 +1,24 @@
 <template>
-  <nav>
+  
+  <Navbar/>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav> -->
 
   <!-- All child components will receive the prop passed in   <router-view> -->
+    <div style="min-height: 60vh">
   <router-view
   :baseURL="baseURL"
       :products="products"
       :categories="categories"
+      @fetchData="fetchData"
   >
 
     </router-view>
+  </div>
+
+  
 </template>
 
 
@@ -21,8 +28,8 @@
   import axios from 'axios';
 export default {
   components:{
-    Navbar
-  },
+    Navbar,
+},
   data() {
     return {
       baseURL: 'https://limitless-lake-55070.herokuapp.com/',
@@ -72,5 +79,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+html {
+  overflow-y: scroll;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adminPanel container">
     <router-link :to="{name : 'AdminProduct'}">
     <button type="button" class="btn btn-primary btn-lg">Admin Products</button>
     </router-link>
@@ -19,6 +19,16 @@ export default {
 </script>
 
 <style>
+.adminPanel{
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+}
+.adminPanel button{
+  font-size: 30px;
+  width: fit-content;
+  margin: 55px 0;
+}
 
 .btn {
     margin-bottom: 20px;

@@ -7,7 +7,14 @@
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text"><sup>$</sup>{{ product.price }}</p>
       <p class="card-text font-italic">{{ product.description.substring(0, 65) }}...</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      
+      <router-link
+        id="edit-product"
+        :to="{ name: 'EditProduct', params: { id: product.id } }">
+    <button class="btn btn-primary">编辑</button>
+  </router-link>
+
+
     </div>
   </div>
 </template>
@@ -22,5 +29,27 @@ export default {
 <style scoped>
   .card-img-top {
   object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card-title {
+  color: #484848;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.card-title:hover {
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}
+
+#edit-product {
+  float: right;
 }
 </style>

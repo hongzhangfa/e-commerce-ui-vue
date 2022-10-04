@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 text-center">
         <h4 class="pt-3">Our Products</h4>
-        <router-link id="add-product" :to="{ name: 'AddProduct' }">
+        <router-link id="add-product" :to="{ name: 'AddProduct' }" v-show="$route.name=='AdminProduct'">
           <button class="btn btn-secondary">Add a new Product</button>
         </router-link>
       </div>

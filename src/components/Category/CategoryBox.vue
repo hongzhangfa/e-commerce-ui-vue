@@ -2,13 +2,19 @@
 
 <div class="card h-100 w-100" style="margin-top: 10px"  >
     <div class="embed-responsive embed-responsive-16by9">
-        <img :src="category.imageURL" class="card-img-top" alt="...">
+        <img :src="category.imageUrl" class="card-img-top" alt="...">
     </div>
 
   <div class="card-body">
     <h5 class="card-title">{{ category.categoryName }} </h5>
     <p class="card-text">{{ category.description }} </p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+    <router-link
+        id="edit-category"
+        :to="{ name: 'EditCategory', params: { id: category.id } }">
+    <button class="btn btn-primary">编辑</button>
+  </router-link>
+
   </div>
 </div>
 
