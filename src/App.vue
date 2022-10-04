@@ -3,8 +3,54 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
-  <router-view/>
+
+  <!-- All child components will receive the prop passed in   <router-view> -->
+  <router-view
+  :baseURL="baseURL"
+      :products="products"
+      :categories="categories"
+  >
+
+    </router-view>
 </template>
+
+
+<script>
+  /* eslint-disable */ 
+  import Navbar from './components/Navbar.vue';
+  import axios from 'axios';
+export default {
+  components:{
+    Navbar
+  },
+  data() {
+    return {
+      baseURL: 'https://limitless-lake-55070.herokuapp.com/',
+      products: null,
+      categories: null,
+    }
+  },
+  methods: {
+    async fetchData() {
+
+      //fetch categories
+      await axios
+        .get(this.baseURL + 'category/')
+        .then((res) => (this.categories = res.data))
+        .catch((err) => console.log(err));
+
+      // fetch products
+      await axios
+        .get(this.baseURL + 'product/')
+        .then((res) => (this.products = res.data))
+        .catch((err) => console.log(err));
+    }
+  },
+  mounted() {
+    this.fetchData()
+  }
+}
+</script>
 
 <style>
 #app {

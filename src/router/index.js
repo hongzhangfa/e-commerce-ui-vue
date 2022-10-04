@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 
 import AddCategory from '../views/Category/AddCategory.vue'
 import Category from '../views/Category/Category.vue'
+import Admin from '../views/Admin/Admin.vue'
+import Product from '../views/Product/Product.vue'
+import AddProduct from '../views/Product/AddProduct.vue'
 
 const routes = [
   {
@@ -18,17 +21,36 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
+   //Admin routes
+  // admin home page
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  },
+
+  {
+    path: '/admin/category',
+    name: 'AdminCategory',
+    component: Category
+  },
   {
     path: '/admin/category/add',
     name: 'AddCategory',
     component: AddCategory
   },
   {
-    path: '/admin/category',
-    name: 'Category',
-    component: Category
+    path: '/admin/product',
+    name: 'AdminProduct',
+    component: Product
   },
+  {
+    path: '/admin/product/new',
+    name: 'AddProduct',
+    component: AddProduct
 
+  }
+ 
 ]
 
 const router = createRouter({

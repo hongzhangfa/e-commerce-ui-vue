@@ -10,6 +10,7 @@
       </div>
 
       <!-- <div>{{ categories[0] }} </div> -->
+      <!-- https://getbootstrap.com/docs/5.2/layout/columns/  https://getbootstrap.com/docs/5.2/utilities/display/ -->
       <div class="row">
         <div v-for="category of categories" :key="category.id" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
           <Category-Box :category="category">
@@ -20,26 +21,27 @@
   </template>
   
   <script>
-import axios from 'axios';
+// import axios from 'axios';
 import CategoryBox from '../../components/Category/CategoryBox.vue';
 
   export default {
     name: "Cate-gory",
+    props: ["categories", "products"],
     data() {
       return {
         baseURL : "https://limitless-lake-55070.herokuapp.com/",
-        categories: []
+        // categories: []
       }
     },
     methods: {
-      async getCategories() {
-        await axios.get(`${this.baseURL}/category/`)
-        .then(res => this.categories = res.data)
-        .catch(err => console.log(err))
-      }
+      // async getCategories() {
+      //   await axios.get(`${this.baseURL}/category/`)
+      //   .then(res => this.categories = res.data)
+      //   .catch(err => console.log(err))
+      // }
     },
     mounted() {
-      this.getCategories();
+      // this.getCategories();
     },
     components: {
       CategoryBox
