@@ -6,12 +6,16 @@
     </div>
 
   <div class="card-body">
+    <!-- 查看该分类下所有product -->
+    <router-link :to="{ name: 'ListProducts', params: { id: category.id } }">
     <h5 class="card-title">{{ category.categoryName }} </h5>
+  </router-link>
+
     <p class="card-text">{{ category.description }} </p>
 
     <router-link
         id="edit-category"
-        :to="{ name: 'EditCategory', params: { id: category.id } }">
+        :to="{ name: 'EditCategory', params: { id: category.id } }" v-show="$route.name == 'AdminCategory'">
     <button class="btn btn-primary">编辑</button>
   </router-link>
 

@@ -1,62 +1,59 @@
 <template>
-  
-  <Navbar/>
-  <!-- <nav>
+  <div id="app">
+    <div id="nav">
+      <Navbar />
+    </div>
+    <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
 
-  <!-- All child components will receive the prop passed in   <router-view> -->
+    <!-- All child components will receive the prop passed in   <router-view> -->
     <div style="min-height: 60vh">
-  <router-view
-  :baseURL="baseURL"
-      :products="products"
-      :categories="categories"
-      @fetchData="fetchData"
-  >
-
-    </router-view>
+      <router-view v-if="products && categories" :baseURL="baseURL" :products="products" :categories="categories" @fetchData="fetchData">
+      </router-view>
+    </div>
+    
+    <Footer />
   </div>
-
-  
 </template>
 
-
 <script>
-  /* eslint-disable */ 
-  import Navbar from './components/Navbar.vue';
-  import axios from 'axios';
+/* eslint-disable */
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+import axios from "axios";
 export default {
-  components:{
+  components: {
     Navbar,
+    Footer,
 },
   data() {
     return {
-      baseURL: 'https://limitless-lake-55070.herokuapp.com/',
+      baseURL: "https://limitless-lake-55070.herokuapp.com/",
       products: null,
-      categories: null,
-    }
+      categories: null
+    };
   },
   methods: {
     async fetchData() {
-
       //fetch categories
       await axios
-        .get(this.baseURL + 'category/')
+        .get(this.baseURL + "category/")
         .then((res) => (this.categories = res.data))
         .catch((err) => console.log(err));
 
       // fetch products
       await axios
-        .get(this.baseURL + 'product/')
+        .get(this.baseURL + "product/")
         .then((res) => (this.products = res.data))
         .catch((err) => console.log(err));
     }
   },
   mounted() {
-    this.fetchData()
+    this.fetchData();
   }
-}
+};
 </script>
 
 <style>
