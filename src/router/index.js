@@ -11,6 +11,10 @@ import Product from '../views/Product/Product.vue'
 import AddProduct from '../views/Product/AddProduct.vue'
 import EditProduct from '../views/Product/EditProduct.vue'
 import ShowDetails from '../views/Product/ShowDetails.vue'
+import Wishlist from '../views/Product/Wishlist.vue'
+
+import Signup from '../views/Signup.vue'
+import Signin from '../views/Signin.vue'
 
 const routes = [
   {
@@ -86,11 +90,22 @@ const routes = [
     component: ShowDetails
   },
 
-  // {
-  //   path: '/wishlist',
-  //   name: 'Wishlist',
-  //   component: Wishlist
-  // },
+  //Signin and Signup
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: Signin
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: Wishlist
+  },
   // {
   //   path : '/cart',
   //   name : 'Cart',
