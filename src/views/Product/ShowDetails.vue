@@ -15,14 +15,22 @@
 
         <p><span class="font-weight-bold">Description: -</span> <br />{{ product.description }}</p>
 
+        <!-- Quantity & Cart -->
         <div class="d-flex flex-row justify-content-between">
           <div class="input-group col-md-3 col-4 p-0">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Quantity</span>
+              <span class="input-group-text">Quantity</span>
             </div>
-            <input class="form-control" type="number" v-model="quantity" />
+            <input type="number" class="form-control" v-model="quantity" />
+          </div>
+
+          <div class="input-group col-md-3 col-4 p-0">
+            <button class="btn" id="add-to-cart-button" @click="addToCart(this.id)">
+              Add to Cart
+            </button>
           </div>
         </div>
+
 
         <!-- Dummy placeholder features -->
         <div class="features pt-3">
@@ -65,7 +73,7 @@ export default {
         if(!this.token) {
             // user is not logged in, show some error 
             swal({
-              text: "Please login to add item in wishlist first!",
+              text: "Please log in to add item in wishlist first!",
               icon: "error",
               closeOnClickOutside: false
             });
@@ -79,6 +87,7 @@ export default {
         .then(
           (response) => {
             if (response.status == 201) {
+                this.wishlistString = "Added to WishList";
               swal({
                 text: "Added to WishList. Please continue",
                 icon: "success"
@@ -94,7 +103,41 @@ export default {
             });
           }
         );
-    }
+    },
+
+    addToCart(productId) {
+        console.log("addToCart productId==> ", productId);
+      if (!this.token) {
+        swal({
+          text: "Please log in to add item in Cart first!",
+          icon: "error",
+        });
+        return;
+      }
+      // 添加物品至购物车中
+      axios
+        .post(`${this.baseURL}cart/add?token=${this.token}`, {
+          productId: productId,
+          quantity: this.quantity,
+        })
+        .then(
+          (response) => {
+            if (response.status == 201) {
+              swal({
+                text: "Product Added to the cart!",
+                icon: "success",
+                closeOnClickOutside: false,
+              });
+              // refresh nav bar
+              this.$emit("fetchData");
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+
   },
   mounted() {
     this.id = this.$route.params.id;
@@ -111,6 +154,10 @@ export default {
   font-weight: 400;
 }
 
+
+/* .input-group>input {
+    width: 20px !important;
+} */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -126,5 +173,9 @@ input[type="number"] {
 #wishlist-button {
   background-color: #b9b9b9;
   border-radius: 0;
+}
+
+#add-to-cart-button {
+  background-color: #febd69;
 }
 </style>

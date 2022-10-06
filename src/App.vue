@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Navbar />
+      <Navbar :cartCount="cartCount" @resetCartCount="resetCartCount"/>
     </div>
     <!-- <nav>
     <router-link to="/">Home</router-link> |
@@ -26,13 +26,14 @@ import axios from "axios";
 export default {
   components: {
     Navbar,
-    Footer,
+    Footer
 },
   data() {
     return {
       baseURL: "https://limitless-lake-55070.herokuapp.com/",
       products: null,
-      categories: null
+      categories: null,
+      cartCount: 0,
     };
   },
   methods: {
@@ -48,9 +49,32 @@ export default {
         .get(this.baseURL + "product/")
         .then((res) => (this.products = res.data))
         .catch((err) => console.log(err));
-    }
+
+// fetch cart item if token is present i.e logged in
+        if (this.token) {
+        await axios.get(`${this.baseURL}cart/?token=${this.token}`).then(
+          (response) => {
+            if (response.status == 200) {
+              // update cart
+              this.cartCount = Object.keys(response.data.cartItems).length;
+              console.log("==> cartCount ", this.cartCount);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    },
+
+    resetCartCount() {
+      this.cartCount = 0;
+    },
+
+    
   },
   mounted() {
+    this.token = localStorage.getItem('token');
     this.fetchData();
   }
 };
@@ -65,18 +89,6 @@ export default {
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 
 html {
   overflow-y: scroll;

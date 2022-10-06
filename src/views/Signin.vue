@@ -46,7 +46,8 @@
             // 设置token
             localStorage.setItem("token", res.data.token);
             this.$emit("fetchData");
-            this.$router.replace("/");
+            // this.$router.replace("/");
+            this.$router.push({ name: "Home" });
             swal({
               text: "Login successful",
               icon: "success",

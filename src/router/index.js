@@ -13,6 +13,9 @@ import EditProduct from '../views/Product/EditProduct.vue'
 import ShowDetails from '../views/Product/ShowDetails.vue'
 import Wishlist from '../views/Product/Wishlist.vue'
 
+import Cart from '../views/Cart/Cart.vue'
+
+
 import Signup from '../views/Signup.vue'
 import Signin from '../views/Signin.vue'
 
@@ -106,11 +109,11 @@ const routes = [
     name: 'Wishlist',
     component: Wishlist
   },
-  // {
-  //   path : '/cart',
-  //   name : 'Cart',
-  //   component : Cart
-  // },
+  {
+    path : '/cart',
+    name : 'Cart',
+    component : Cart
+  },
  
 ]
 
